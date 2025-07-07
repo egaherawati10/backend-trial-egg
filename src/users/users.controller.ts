@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { plainToInstance } from 'class-transformer';
@@ -26,9 +26,9 @@ export class UsersController {
 
     @Post()
     async createUser(
-        @Body(new ValidationPipe()) createUserDto: CreateUserDto,
+        @Body(new ValidationPipe()) createDto: CreateUserDto,
     ) {
-        const newUser = await this.usersService.createUser(createUserDto);
+        const newUser = await this.usersService.createUser(createDto);
         return plainToInstance(User, newUser, { excludeExtraneousValues: true });
     }
 }

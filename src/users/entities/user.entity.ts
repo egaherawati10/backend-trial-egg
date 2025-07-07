@@ -4,6 +4,8 @@ export class User {
 
   @Expose()
   id: number;
+
+  @Expose()
   username: string;
 
   @Exclude()

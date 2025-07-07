@@ -14,7 +14,12 @@ export class UsersRepository implements UsersRepositoryItf {
     }
 
     create(createDto: CreateUserDto): User {
-        const newUser = new User(this.users.length + 1, createDto.username, createDto.password, createDto.email, createDto.isActive?true:false);
+        const newUser = new User(this.users.length + 1, 
+            createDto.username, 
+            createDto.password, 
+            createDto.email, 
+            createDto.isActive?true:false
+        );
         this.users.push(newUser);
         return newUser;
     }
