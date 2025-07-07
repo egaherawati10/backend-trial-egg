@@ -1,7 +1,20 @@
-// import { InputType, Int, Field } from '@nestjs/graphql';
+import { Exclude, Expose } from "class-transformer";
+import { IsBoolean, IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
 
-// @InputType()
-// export class CreateUserInput {
-//   @Field(() => Int, { description: 'Example field (placeholder)' })
-//   exampleField: number;
-// }
+export class CreateUserDto {
+    @IsString()
+    @IsNotEmpty()
+    username: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @MinLength(8)
+    password: string;
+
+    @IsEmail()
+    @IsNotEmpty()
+    email: string;
+
+    @IsBoolean()
+    isActive?: boolean = true;
+}

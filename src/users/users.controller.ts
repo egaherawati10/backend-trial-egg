@@ -1,14 +1,18 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
+import { plainToInstance } from 'class-transformer';
+import { CreateUserDto } from './dto/create-user.input';
 
 @Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     @Get()
-    getUsers(): User[] {
-        return this.usersService.listUsers();
+    async getUsers(): Promise<User[]> {
+        const users = await this.usersService.listUsers();
+
+        return plainToInstance(User, users, { excludeExtraneousValues: true });
     }
 
     @Get(':username')
@@ -17,16 +21,14 @@ export class UsersController {
         if (!userByUsername) {
             throw new Error('User not found');
         }
-        return userByUsername;
+        return plainToInstance(User, this.usersService, { excludeExtraneousValues: true });
     }
 
     @Post()
-    createUser(
-        @Body('username') username: string,
-        @Body('password') password: string,
-        @Body('email') email: string,
-        @Body('isActive') isActive: boolean
-    ): User {
-        return this.usersService.createUser(username, password, email, isActive);
+    async createUser(
+        @Body(new ValidationPipe()) createUserDto: CreateUserDto,
+    ) {
+        const newUser = await this.usersService.createUser(createUserDto);
+        return plainToInstance(User, newUser, { excludeExtraneousValues: true });
     }
 }

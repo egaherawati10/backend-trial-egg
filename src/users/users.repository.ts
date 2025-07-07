@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { User } from "./entities/user.entity";
 import { UsersRepositoryItf } from "./users.repository.interface";
+import { CreateUserDto } from "./dto/create-user.input";
 
 @Injectable()
 export class UsersRepository implements UsersRepositoryItf {
@@ -12,8 +13,8 @@ export class UsersRepository implements UsersRepositoryItf {
         return this.users;
     }
 
-    create(username: string, password: string, email: string, isActive: boolean): User {
-        const newUser = new User(this.users.length + 1, username, password, email, isActive);
+    create(createDto: CreateUserDto): User {
+        const newUser = new User(this.users.length + 1, createDto.username, createDto.password, createDto.email, createDto.isActive?true:false);
         this.users.push(newUser);
         return newUser;
     }
