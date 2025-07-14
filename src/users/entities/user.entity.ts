@@ -1,7 +1,6 @@
-import { Exclude, Expose } from "class-transformer";
+import { Exclude, Expose } from 'class-transformer';
 
 export class User {
-
   @Expose()
   id: number;
 
@@ -10,7 +9,7 @@ export class User {
 
   @Exclude()
   password: string;
-  
+
   @Expose()
   email: string;
 
