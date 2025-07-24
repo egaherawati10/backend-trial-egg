@@ -16,7 +16,7 @@ export class AuthController {
             email: string;
             password: string }, 
         ) {
-            return this.authService.register( body.email, body.username, body.password);
+            return this.authService.register(body);
         }
 
         @UseGuards(LocalAuthGuard)
@@ -31,3 +31,33 @@ export class AuthController {
             return req.user;
         }
 }
+
+// import {
+//   Controller,
+//   Post,
+//   Body,
+//   UseGuards,
+//   Request,
+// } from '@nestjs/common';
+// import { AuthService } from './auth.service';
+// import { RegisterDto } from './dto/register.dto';
+// import { LocalAuthGuard } from './local-auth.guard';
+// import { LoginDto } from './dto/login.dto';
+
+
+// @Controller('auth')
+// export class AuthController {
+//   constructor(private readonly authService: AuthService) {}
+
+//   @Post('register')
+//   async register(@Body() dto: RegisterDto) {
+//     return this.authService.register(dto);
+//   }
+
+//   @UseGuards(LocalAuthGuard)
+//   @Post('login')
+//   async login(@Request() req: any, @Body() _dto: LoginDto) {
+//     // req.user is attached by LocalStrategy after validation
+//     return this.authService.login(req.user);
+//   }
+// }

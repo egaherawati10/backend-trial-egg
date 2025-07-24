@@ -1,33 +1,32 @@
-import { Exclude, Expose } from "class-transformer";
+import { Account } from "src/accounts/entities/account.entity";
+import { Transaction } from "src/transactions/entities/transaction.entity";
+
+export enum UserStatus {
+  active = 'active',
+  suspended = 'suspended',
+  closed = 'closed',
+}
+
+export enum UserRole {
+  user = 'user',
+  admin = 'admin',
+}
 
 export class User {
-
-  @Expose()
   id: number;
-
-  @Expose()
+  name: string;
   username: string;
-
-  @Exclude()
-  password: string;
-  
-  @Expose()
   email: string;
+  password: string;
+  phoneNumber: string;
+  address: string;
+  birthdate: Date;
+  nationalId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  status: UserStatus;
+  role: UserRole;
 
-  @Expose()
-  isActive: boolean = true;
-
-  constructor(
-    id: number,
-    username: string,
-    password: string,
-    email: string,
-    isActive: boolean = true,
-  ) {
-    this.id = id;
-    this.username = username;
-    this.password = password;
-    this.email = email;
-    this.isActive = isActive;
-  }
+  accounts?: Account[];
+  transactions?: Transaction[];
 }

@@ -16,7 +16,6 @@ enum UserStatus {
 enum UserRole {
   user
   admin
-  teller
 }
 
 enum AccountType {

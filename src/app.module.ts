@@ -6,6 +6,8 @@ import { DoctorsModule } from './doctors/doctors.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
+import { AccountsModule } from './accounts/accounts.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 // @Module({
 //   imports: [
@@ -27,7 +29,7 @@ import { AuthModule } from './auth/auth.module';
 // })
 
 @Module({
-  imports: [UsersModule, PrismaModule, AuthModule],
+  imports: [UsersModule, PrismaModule, AuthModule, AccountsModule, TransactionsModule],
   controllers: [AppController],
   providers: [AppService],
 })

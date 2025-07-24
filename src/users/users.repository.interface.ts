@@ -1,8 +1,11 @@
-import { CreateUserDto } from "./dto/create-user.input";
-import { User } from "./entities/user.entity";
+import { User, Prisma } from '@prisma/client';
 
 export interface UsersRepositoryItf {
-    getAll(): User[];
-    userByUsername(username: string): User | undefined;
-    create(createDto: CreateUserDto): User;
+  findAll(): Promise<User[]>;
+  findById(id: number): Promise<User | null>;
+  findByUsername(username: string): Promise<User | null>;
+  findByEmail(email: string): Promise<User | null>;
+  create(data: Prisma.UserCreateInput): Promise<User>;
+  update(id: number, data: Prisma.UserUpdateInput): Promise<User>;
+  delete(id: number): Promise<void>;
 }
