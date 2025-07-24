@@ -3,5 +3,6 @@ import { User } from "./entities/user.entity";
 
 export interface UsersServiceItf {
     listUsers(): User[];
+    userByUsername(username: string): User | undefined;
     createUser(createDto: CreateUserDto): User;
 }

@@ -13,6 +13,16 @@ export class UsersRepository implements UsersRepositoryItf {
         return this.users;
     }
 
+    userByUsername(username: string): User | undefined {
+    const res = this.users.find((user) => user.username === username);
+    console.log(res);
+    return res;
+    }
+
+    // userByUsername(username: string): User | undefined {
+    // return this.users.find((user) => user.username === username);
+    // }
+
     create(createDto: CreateUserDto): User {
         const newUser = new User(this.users.length + 1, 
             createDto.username, 

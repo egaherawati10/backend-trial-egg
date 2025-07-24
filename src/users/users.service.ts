@@ -12,8 +12,14 @@ export class UsersService implements UsersServiceItf{
   }
 
   userByUsername(username: string) {
-    return this.repo.getAll().find((user) => user.username === username);
+    const res = this.repo.userByUsername(username);
+    console.log(res);
+    return res;
   }
+
+  // userByUsername(username: string) {
+  //   return this.repo.getAll().find((user) => user.username === username);
+  // }
 
   createUser(createDto: CreateUserDto): User {
     return this.repo.create(createDto);
